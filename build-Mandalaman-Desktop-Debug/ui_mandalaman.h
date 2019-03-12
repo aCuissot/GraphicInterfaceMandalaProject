@@ -99,12 +99,14 @@ public:
 
         sliceSlider = new QSlider(upperToolBar);
         sliceSlider->setObjectName(QString::fromUtf8("sliceSlider"));
+        sliceSlider->setMaximum(20);
         sliceSlider->setOrientation(Qt::Horizontal);
 
         horizontalLayout->addWidget(sliceSlider);
 
         sliceSpinBox = new QSpinBox(upperToolBar);
         sliceSpinBox->setObjectName(QString::fromUtf8("sliceSpinBox"));
+        sliceSpinBox->setMaximum(20);
 
         horizontalLayout->addWidget(sliceSpinBox);
 
@@ -200,6 +202,8 @@ public:
         menuHelp->addAction(actionAbout);
 
         retranslateUi(Mandalaman);
+        QObject::connect(sliceSlider, SIGNAL(valueChanged(int)), sliceSpinBox, SLOT(setValue(int)));
+        QObject::connect(sliceSpinBox, SIGNAL(valueChanged(int)), sliceSlider, SLOT(setValue(int)));
 
         QMetaObject::connectSlotsByName(Mandalaman);
     } // setupUi

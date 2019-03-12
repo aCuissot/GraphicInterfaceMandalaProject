@@ -27,13 +27,20 @@
        </item>
        <item>
         <widget class="QSlider" name="sliceSlider">
+         <property name="maximum">
+          <number>20</number>
+         </property>
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QSpinBox" name="sliceSpinBox"/>
+        <widget class="QSpinBox" name="sliceSpinBox">
+         <property name="maximum">
+          <number>20</number>
+         </property>
+        </widget>
        </item>
        <item>
         <widget class="QCheckBox" name="mirrorCheckBox">
@@ -199,5 +206,38 @@
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>sliceSlider</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>sliceSpinBox</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>262</x>
+     <y>126</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>303</x>
+     <y>129</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sliceSpinBox</sender>
+   <signal>valueChanged(int)</signal>
+   <receiver>sliceSlider</receiver>
+   <slot>setValue(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>294</x>
+     <y>119</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>125</x>
+     <y>122</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
