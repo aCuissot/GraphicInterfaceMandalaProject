@@ -1,13 +1,13 @@
 #ifndef MANDALAMAN_H
 #define MANDALAMAN_H
 
-#include <QDialog>
+#include <QMainWindow>
 
 namespace Ui {
 class Mandalaman;
 }
 
-class Mandalaman : public QDialog
+class Mandalaman : public QMainWindow
 {
     Q_OBJECT
 

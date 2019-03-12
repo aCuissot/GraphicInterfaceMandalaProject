@@ -2,7 +2,7 @@
 #include "ui_mandalaman.h"
 
 Mandalaman::Mandalaman(QWidget *parent) :
-    QDialog(parent),
+    QMainWindow(parent),
     ui(new Ui::Mandalaman)
 {
     ui->setupUi(this);
