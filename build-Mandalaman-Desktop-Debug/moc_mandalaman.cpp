@@ -22,25 +22,46 @@ static const uint qt_meta_data_Mandalaman[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       0,    0, // methods
+       6,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
        0,       // signalCount
 
+ // slots: signature, parameters, type, tag, flags
+      12,   11,   11,   11, 0x08,
+      25,   11,   11,   11, 0x08,
+      36,   11,   11,   11, 0x08,
+      44,   11,   11,   11, 0x08,
+      70,   11,   11,   11, 0x08,
+      97,   11,   11,   11, 0x08,
+
        0        // eod
 };
 
 static const char qt_meta_stringdata_Mandalaman[] = {
-    "Mandalaman\0"
+    "Mandalaman\0\0saveToFile()\0closeApp()\0"
+    "about()\0on_actionQuit_triggered()\0"
+    "on_actionAbout_triggered()\0"
+    "on_actionSave_as_triggered()\0"
 };
 
 void Mandalaman::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
-    Q_UNUSED(_o);
-    Q_UNUSED(_id);
-    Q_UNUSED(_c);
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        Q_ASSERT(staticMetaObject.cast(_o));
+        Mandalaman *_t = static_cast<Mandalaman *>(_o);
+        switch (_id) {
+        case 0: _t->saveToFile(); break;
+        case 1: _t->closeApp(); break;
+        case 2: _t->about(); break;
+        case 3: _t->on_actionQuit_triggered(); break;
+        case 4: _t->on_actionAbout_triggered(); break;
+        case 5: _t->on_actionSave_as_triggered(); break;
+        default: ;
+        }
+    }
     Q_UNUSED(_a);
 }
 
@@ -75,6 +96,11 @@ int Mandalaman::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     _id = QMainWindow::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 6)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 6;
+    }
     return _id;
 }
 QT_END_MOC_NAMESPACE

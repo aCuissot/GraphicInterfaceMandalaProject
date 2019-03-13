@@ -88,6 +88,7 @@ public:
         verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
         upperToolBar = new QWidget(centralWidget);
         upperToolBar->setObjectName(QString::fromUtf8("upperToolBar"));
+        upperToolBar->setMaximumSize(QSize(16777215, 50));
         horizontalLayout = new QHBoxLayout(upperToolBar);
         horizontalLayout->setSpacing(6);
         horizontalLayout->setContentsMargins(11, 11, 11, 11);
@@ -146,6 +147,8 @@ public:
 
         widget = new QWidget(centralWidget);
         widget->setObjectName(QString::fromUtf8("widget"));
+        widget->setEnabled(true);
+        widget->setMaximumSize(QSize(16777215, 50));
         horizontalLayout_2 = new QHBoxLayout(widget);
         horizontalLayout_2->setSpacing(6);
         horizontalLayout_2->setContentsMargins(11, 11, 11, 11);

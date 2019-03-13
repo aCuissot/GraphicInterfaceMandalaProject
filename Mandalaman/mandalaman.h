@@ -21,9 +21,10 @@ public:
 private:
     Ui::Mandalaman *ui;
     NelsonMandala * mandalaCanvas;
-
+    int nbSlice;
 
 private slots:
+/*
     void sliceFnct(int);
     void mirrorFnct(bool);
     void clearFnct();
@@ -33,7 +34,14 @@ private slots:
     void lineWidth(int);
     void color();
     void rainbowColor();
+    */
+    void saveToFile();
+
     void closeApp();
+    void about();
+    void on_actionQuit_triggered();
+    void on_actionAbout_triggered();
+    void on_actionSave_as_triggered();
 };
 
 #endif // MANDALAMAN_H
