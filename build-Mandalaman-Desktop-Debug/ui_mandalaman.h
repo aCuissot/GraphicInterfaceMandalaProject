@@ -54,10 +54,10 @@ public:
     QWidget *futurCanevasLayout;
     QWidget *widget;
     QHBoxLayout *horizontalLayout_2;
-    QLabel *label;
+    QLabel *lineWidthLabel;
     QSlider *lineWidthSlider;
-    QPushButton *pushButton;
-    QPushButton *pushButton_2;
+    QPushButton *colorBtn;
+    QPushButton *rainbowColorBtn;
     QMenuBar *menuBar;
     QMenu *menuFile;
     QMenu *menuEdit;
@@ -89,6 +89,10 @@ public:
         upperToolBar = new QWidget(centralWidget);
         upperToolBar->setObjectName(QString::fromUtf8("upperToolBar"));
         upperToolBar->setMaximumSize(QSize(16777215, 50));
+        QFont font;
+        font.setUnderline(false);
+        upperToolBar->setFont(font);
+        upperToolBar->setAutoFillBackground(false);
         horizontalLayout = new QHBoxLayout(upperToolBar);
         horizontalLayout->setSpacing(6);
         horizontalLayout->setContentsMargins(11, 11, 11, 11);
@@ -153,10 +157,10 @@ public:
         horizontalLayout_2->setSpacing(6);
         horizontalLayout_2->setContentsMargins(11, 11, 11, 11);
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-        label = new QLabel(widget);
-        label->setObjectName(QString::fromUtf8("label"));
+        lineWidthLabel = new QLabel(widget);
+        lineWidthLabel->setObjectName(QString::fromUtf8("lineWidthLabel"));
 
-        horizontalLayout_2->addWidget(label);
+        horizontalLayout_2->addWidget(lineWidthLabel);
 
         lineWidthSlider = new QSlider(widget);
         lineWidthSlider->setObjectName(QString::fromUtf8("lineWidthSlider"));
@@ -164,15 +168,15 @@ public:
 
         horizontalLayout_2->addWidget(lineWidthSlider);
 
-        pushButton = new QPushButton(widget);
-        pushButton->setObjectName(QString::fromUtf8("pushButton"));
+        colorBtn = new QPushButton(widget);
+        colorBtn->setObjectName(QString::fromUtf8("colorBtn"));
 
-        horizontalLayout_2->addWidget(pushButton);
+        horizontalLayout_2->addWidget(colorBtn);
 
-        pushButton_2 = new QPushButton(widget);
-        pushButton_2->setObjectName(QString::fromUtf8("pushButton_2"));
+        rainbowColorBtn = new QPushButton(widget);
+        rainbowColorBtn->setObjectName(QString::fromUtf8("rainbowColorBtn"));
 
-        horizontalLayout_2->addWidget(pushButton_2);
+        horizontalLayout_2->addWidget(rainbowColorBtn);
 
 
         verticalLayout->addWidget(widget);
@@ -232,9 +236,9 @@ public:
         );
         clearBtn->setText(QApplication::translate("Mandalaman", "Clear", 0, QApplication::UnicodeUTF8));
         checkBox->setText(QApplication::translate("Mandalaman", "Grid", 0, QApplication::UnicodeUTF8));
-        label->setText(QApplication::translate("Mandalaman", "Line width", 0, QApplication::UnicodeUTF8));
-        pushButton->setText(QApplication::translate("Mandalaman", "Color", 0, QApplication::UnicodeUTF8));
-        pushButton_2->setText(QApplication::translate("Mandalaman", "Rainbow", 0, QApplication::UnicodeUTF8));
+        lineWidthLabel->setText(QApplication::translate("Mandalaman", "Line width", 0, QApplication::UnicodeUTF8));
+        colorBtn->setText(QApplication::translate("Mandalaman", "Color", 0, QApplication::UnicodeUTF8));
+        rainbowColorBtn->setText(QApplication::translate("Mandalaman", "Rainbow", 0, QApplication::UnicodeUTF8));
         menuFile->setTitle(QApplication::translate("Mandalaman", "File", 0, QApplication::UnicodeUTF8));
         menuEdit->setTitle(QApplication::translate("Mandalaman", "Edit", 0, QApplication::UnicodeUTF8));
         menuHelp->setTitle(QApplication::translate("Mandalaman", "Help", 0, QApplication::UnicodeUTF8));

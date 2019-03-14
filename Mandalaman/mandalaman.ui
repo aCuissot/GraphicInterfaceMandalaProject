@@ -23,6 +23,14 @@
         <height>50</height>
        </size>
       </property>
+      <property name="font">
+       <font>
+        <underline>false</underline>
+       </font>
+      </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
         <widget class="QLabel" name="sliceLabel">
@@ -104,7 +112,7 @@
       </property>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <item>
-        <widget class="QLabel" name="label">
+        <widget class="QLabel" name="lineWidthLabel">
          <property name="text">
           <string>Line width</string>
          </property>
@@ -118,14 +126,14 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton">
+        <widget class="QPushButton" name="colorBtn">
          <property name="text">
           <string>Color</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton_2">
+        <widget class="QPushButton" name="rainbowColorBtn">
          <property name="text">
           <string>Rainbow</string>
          </property>
@@ -229,12 +237,12 @@
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>262</x>
-     <y>126</y>
+     <x>276</x>
+     <y>85</y>
     </hint>
     <hint type="destinationlabel">
-     <x>303</x>
-     <y>129</y>
+     <x>330</x>
+     <y>84</y>
     </hint>
    </hints>
   </connection>
@@ -245,12 +253,12 @@
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>294</x>
-     <y>119</y>
+     <x>330</x>
+     <y>84</y>
     </hint>
     <hint type="destinationlabel">
-     <x>125</x>
-     <y>122</y>
+     <x>181</x>
+     <y>85</y>
     </hint>
    </hints>
   </connection>

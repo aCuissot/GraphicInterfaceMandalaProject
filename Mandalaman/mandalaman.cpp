@@ -3,8 +3,8 @@
 //#include "nelsonMandala.h"
 #include "qmessagebox.h"
 #include "qfiledialog.h"
-
-class NelsonMandala;
+#include "qcolordialog.h"
+#include "QColor"
 
 Mandalaman::Mandalaman(QWidget *parent) :
     QMainWindow(parent),
@@ -12,7 +12,9 @@ Mandalaman::Mandalaman(QWidget *parent) :
 {
     ui->setupUi(this);
     //mandalaCanvas = new NelsonMandala();
+    color = QColor(255,255,255);
     nbSlice = 2;
+
 }
 
 Mandalaman::~Mandalaman()
@@ -66,6 +68,17 @@ void Mandalaman::rainbowColor(){
 }
 
 */
+
+void Mandalaman::changeColor()
+{
+    QColor newColor = QColorDialog::getColor(color,parentWidget());
+    if ( newColor != color )
+    {
+        color = newColor;
+    }
+
+}
+
 void Mandalaman::saveToFile()
 {
     QString fileName = QFileDialog::getSaveFileName(this,
@@ -110,4 +123,9 @@ void Mandalaman::on_actionAbout_triggered()
 void Mandalaman::on_actionSave_as_triggered()
 {
     saveToFile();
+}
+
+void Mandalaman::on_colorBtn_clicked()
+{
+    changeColor();
 }

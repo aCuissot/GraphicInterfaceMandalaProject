@@ -13,8 +13,10 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mandalaman.cpp
+        mandalaman.cpp \
+    painter.cpp
 
-HEADERS  += mandalaman.h
+HEADERS  += mandalaman.h \
+    painter.h
 
 FORMS    += mandalaman.ui

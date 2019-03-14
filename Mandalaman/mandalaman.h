@@ -8,6 +8,7 @@ class Mandalaman;
 }
 
 class NelsonMandala;//classe du Widget central de M Seraphim
+class QColorDialog;
 
 class Mandalaman : public QMainWindow
 {
@@ -22,6 +23,7 @@ private:
     Ui::Mandalaman *ui;
     NelsonMandala * mandalaCanvas;
     int nbSlice;
+    QColor color;
 
 private slots:
 /*
@@ -36,12 +38,13 @@ private slots:
     void rainbowColor();
     */
     void saveToFile();
-
+    void changeColor();
     void closeApp();
     void about();
     void on_actionQuit_triggered();
     void on_actionAbout_triggered();
     void on_actionSave_as_triggered();
+    void on_colorBtn_clicked();
 };
 
 #endif // MANDALAMAN_H

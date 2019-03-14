@@ -22,7 +22,7 @@ static const uint qt_meta_data_Mandalaman[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       6,   14, // methods
+       8,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -32,19 +32,22 @@ static const uint qt_meta_data_Mandalaman[] = {
  // slots: signature, parameters, type, tag, flags
       12,   11,   11,   11, 0x08,
       25,   11,   11,   11, 0x08,
-      36,   11,   11,   11, 0x08,
-      44,   11,   11,   11, 0x08,
-      70,   11,   11,   11, 0x08,
-      97,   11,   11,   11, 0x08,
+      39,   11,   11,   11, 0x08,
+      50,   11,   11,   11, 0x08,
+      58,   11,   11,   11, 0x08,
+      84,   11,   11,   11, 0x08,
+     111,   11,   11,   11, 0x08,
+     140,   11,   11,   11, 0x08,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_Mandalaman[] = {
-    "Mandalaman\0\0saveToFile()\0closeApp()\0"
-    "about()\0on_actionQuit_triggered()\0"
+    "Mandalaman\0\0saveToFile()\0changeColor()\0"
+    "closeApp()\0about()\0on_actionQuit_triggered()\0"
     "on_actionAbout_triggered()\0"
     "on_actionSave_as_triggered()\0"
+    "on_colorBtn_clicked()\0"
 };
 
 void Mandalaman::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -54,11 +57,13 @@ void Mandalaman::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         Mandalaman *_t = static_cast<Mandalaman *>(_o);
         switch (_id) {
         case 0: _t->saveToFile(); break;
-        case 1: _t->closeApp(); break;
-        case 2: _t->about(); break;
-        case 3: _t->on_actionQuit_triggered(); break;
-        case 4: _t->on_actionAbout_triggered(); break;
-        case 5: _t->on_actionSave_as_triggered(); break;
+        case 1: _t->changeColor(); break;
+        case 2: _t->closeApp(); break;
+        case 3: _t->about(); break;
+        case 4: _t->on_actionQuit_triggered(); break;
+        case 5: _t->on_actionAbout_triggered(); break;
+        case 6: _t->on_actionSave_as_triggered(); break;
+        case 7: _t->on_colorBtn_clicked(); break;
         default: ;
         }
     }
@@ -97,9 +102,9 @@ int Mandalaman::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 6)
+        if (_id < 8)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 6;
+        _id -= 8;
     }
     return _id;
 }
