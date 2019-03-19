@@ -6,7 +6,7 @@
 ** WARNING! All changes made in this file will be lost!
 *****************************************************************************/
 
-#include "../Mandalaman/mandalaman.h"
+#include "../GraphicInterfaceMandalaProject-master/Mandalaman/mandalaman.h"
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'mandalaman.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 63
@@ -31,20 +31,21 @@ static const uint qt_meta_data_Mandalaman[] = {
 
  // slots: signature, parameters, type, tag, flags
       12,   11,   11,   11, 0x08,
-      25,   11,   11,   11, 0x08,
-      39,   11,   11,   11, 0x08,
-      50,   11,   11,   11, 0x08,
-      58,   11,   11,   11, 0x08,
-      84,   11,   11,   11, 0x08,
-     111,   11,   11,   11, 0x08,
-     140,   11,   11,   11, 0x08,
+      32,   11,   25,   11, 0x08,
+      46,   11,   11,   11, 0x08,
+      57,   11,   11,   11, 0x08,
+      65,   11,   11,   11, 0x08,
+      91,   11,   11,   11, 0x08,
+     118,   11,   11,   11, 0x08,
+     147,   11,   11,   11, 0x08,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_Mandalaman[] = {
-    "Mandalaman\0\0saveToFile()\0changeColor()\0"
-    "closeApp()\0about()\0on_actionQuit_triggered()\0"
+    "Mandalaman\0\0saveToFile()\0QColor\0"
+    "changeColor()\0closeApp()\0about()\0"
+    "on_actionQuit_triggered()\0"
     "on_actionAbout_triggered()\0"
     "on_actionSave_as_triggered()\0"
     "on_colorBtn_clicked()\0"
@@ -57,7 +58,8 @@ void Mandalaman::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         Mandalaman *_t = static_cast<Mandalaman *>(_o);
         switch (_id) {
         case 0: _t->saveToFile(); break;
-        case 1: _t->changeColor(); break;
+        case 1: { QColor _r = _t->changeColor();
+            if (_a[0]) *reinterpret_cast< QColor*>(_a[0]) = _r; }  break;
         case 2: _t->closeApp(); break;
         case 3: _t->about(); break;
         case 4: _t->on_actionQuit_triggered(); break;
@@ -67,7 +69,6 @@ void Mandalaman::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         default: ;
         }
     }
-    Q_UNUSED(_a);
 }
 
 const QMetaObjectExtraData Mandalaman::staticMetaObjectExtraData = {

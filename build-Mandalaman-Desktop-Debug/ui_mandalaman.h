@@ -104,6 +104,7 @@ public:
 
         sliceSlider = new QSlider(upperToolBar);
         sliceSlider->setObjectName(QString::fromUtf8("sliceSlider"));
+        sliceSlider->setMinimum(1);
         sliceSlider->setMaximum(20);
         sliceSlider->setOrientation(Qt::Horizontal);
 
@@ -111,6 +112,7 @@ public:
 
         sliceSpinBox = new QSpinBox(upperToolBar);
         sliceSpinBox->setObjectName(QString::fromUtf8("sliceSpinBox"));
+        sliceSpinBox->setMinimum(1);
         sliceSpinBox->setMaximum(20);
 
         horizontalLayout->addWidget(sliceSpinBox);
@@ -132,11 +134,13 @@ public:
 
         checkBox = new QCheckBox(upperToolBar);
         checkBox->setObjectName(QString::fromUtf8("checkBox"));
+        checkBox->setChecked(true);
 
         horizontalLayout->addWidget(checkBox);
 
         gridOpacitySlider = new QSlider(upperToolBar);
         gridOpacitySlider->setObjectName(QString::fromUtf8("gridOpacitySlider"));
+        gridOpacitySlider->setSliderPosition(99);
         gridOpacitySlider->setOrientation(Qt::Horizontal);
 
         horizontalLayout->addWidget(gridOpacitySlider);
@@ -146,6 +150,7 @@ public:
 
         futurCanevasLayout = new QWidget(centralWidget);
         futurCanevasLayout->setObjectName(QString::fromUtf8("futurCanevasLayout"));
+        futurCanevasLayout->setCursor(QCursor(Qt::CrossCursor));
 
         verticalLayout->addWidget(futurCanevasLayout);
 
@@ -164,6 +169,10 @@ public:
 
         lineWidthSlider = new QSlider(widget);
         lineWidthSlider->setObjectName(QString::fromUtf8("lineWidthSlider"));
+        lineWidthSlider->setMinimum(1);
+        lineWidthSlider->setMaximum(10);
+        lineWidthSlider->setPageStep(3);
+        lineWidthSlider->setSliderPosition(5);
         lineWidthSlider->setOrientation(Qt::Horizontal);
 
         horizontalLayout_2->addWidget(lineWidthSlider);
@@ -175,6 +184,10 @@ public:
 
         rainbowColorBtn = new QPushButton(widget);
         rainbowColorBtn->setObjectName(QString::fromUtf8("rainbowColorBtn"));
+        QIcon icon;
+        icon.addFile(QString::fromUtf8("../../rainbowBtnImg.png"), QSize(), QIcon::Normal, QIcon::Off);
+        rainbowColorBtn->setIcon(icon);
+        rainbowColorBtn->setAutoRepeat(false);
 
         horizontalLayout_2->addWidget(rainbowColorBtn);
 
@@ -238,7 +251,7 @@ public:
         checkBox->setText(QApplication::translate("Mandalaman", "Grid", 0, QApplication::UnicodeUTF8));
         lineWidthLabel->setText(QApplication::translate("Mandalaman", "Line width", 0, QApplication::UnicodeUTF8));
         colorBtn->setText(QApplication::translate("Mandalaman", "Color", 0, QApplication::UnicodeUTF8));
-        rainbowColorBtn->setText(QApplication::translate("Mandalaman", "Rainbow", 0, QApplication::UnicodeUTF8));
+        rainbowColorBtn->setText(QString());
         menuFile->setTitle(QApplication::translate("Mandalaman", "File", 0, QApplication::UnicodeUTF8));
         menuEdit->setTitle(QApplication::translate("Mandalaman", "Edit", 0, QApplication::UnicodeUTF8));
         menuHelp->setTitle(QApplication::translate("Mandalaman", "Help", 0, QApplication::UnicodeUTF8));
