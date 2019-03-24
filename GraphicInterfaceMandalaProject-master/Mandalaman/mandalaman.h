@@ -30,7 +30,6 @@ private slots:
 
 
     /*
-    void sliceFnct(int);
     void mirrorFnct(bool);
     void clearFnct();
     void resolutionFnct(int);
@@ -40,8 +39,9 @@ private slots:
     void color();
     void rainbowColor();
     */
+    void sliceFnct(int);
 
-
+    void clearFnct();
     void saveToFile();
     QColor changeColor();
     void closeApp();
@@ -50,6 +50,7 @@ private slots:
     void on_actionAbout_triggered();
     void on_actionSave_as_triggered();
     void on_colorBtn_clicked();
+    void changePenWidth(int);
 };
 
 #endif // MANDALAMAN_H

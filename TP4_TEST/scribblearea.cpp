@@ -1,11 +1,38 @@
 #include <QtWidgets>
 #if defined(QT_PRINTSUPPORT_LIB)
 #include <QtPrintSupport/qtprintsupportglobal.h>
-
+#include <math.h>
 #endif
-
+#define PI 3.1415926535
 
 #include "scribblearea.h"
+
+typedef struct coordonneesSpheriques{
+    double r;
+    double theta;
+}coordonneesSpheriques;
+
+coordonneesSpheriques pointToSpheric(QPoint p, int mid){
+    int x, y;
+    x=p.x()-mid;
+    y=p.y()-mid;
+    coordonneesSpheriques c;
+    c.r = sqrt(x*x + y*y);
+    c.theta = tan((double)y/x);
+    return c;
+}
+
+coordonneesSpheriques rotation(coordonneesSpheriques c, int nbSlices){
+    c.theta+=2*PI/nbSlices;
+    if (c.theta>2*PI){
+        c.theta-=2*PI;
+    }
+    return c;
+}
+
+QPoint sphericToPoint(coordonneesSpheriques c, int mid){
+    return QPoint((int) c.r*cos(c.theta) + mid, (int) c.r*sin(c.theta) + mid);
+}
 
 ScribbleArea::ScribbleArea(QWidget *parent)
     : QWidget(parent)
@@ -15,6 +42,7 @@ ScribbleArea::ScribbleArea(QWidget *parent)
     scribbling = false;
     myPenWidth = 1;
     myPenColor = Qt::blue;
+    nbSlices=8;
 }
 
 bool ScribbleArea::openImage(const QString &fileName)
@@ -71,14 +99,25 @@ void ScribbleArea::mousePressEvent(QMouseEvent *event)
 
 void ScribbleArea::mouseMoveEvent(QMouseEvent *event)
 {
-    if ((event->buttons() & Qt::LeftButton) && scribbling)
-        drawLineTo(event->pos());
+    if ((event->buttons() & Qt::LeftButton) && scribbling){
+        QPoint p = event->pos();
+        coordonneesSpheriques c = pointToSpheric(p, 250);
+        for (int i = 0; i < nbSlices; ++ i){
+            drawLineTo(sphericToPoint(c,250));
+            c = rotation(c, nbSlices);
+        }
+    }
 }
 
 void ScribbleArea::mouseReleaseEvent(QMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton && scribbling) {
-        drawLineTo(event->pos());
+        QPoint p = event->pos();
+        coordonneesSpheriques c = pointToSpheric(p, 250);
+        for (int i = 0; i < nbSlices; ++ i){
+            drawLineTo(sphericToPoint(c,250));
+            c = rotation(c, nbSlices);
+        }
         scribbling = false;
     }
 }

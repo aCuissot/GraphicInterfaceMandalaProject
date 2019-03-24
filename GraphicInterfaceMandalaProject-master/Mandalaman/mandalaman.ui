@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>903</width>
-    <height>574</height>
+    <width>1000</width>
+    <height>669</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -73,6 +73,11 @@
         <widget class="QComboBox" name="resolutionDropDownList">
          <item>
           <property name="text">
+           <string>500x500</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
            <string>400x400</string>
           </property>
          </item>
@@ -113,6 +118,28 @@
       <property name="cursor">
        <cursorShape>CrossCursor</cursorShape>
       </property>
+      <widget class="painter" name="paintingZone" native="true">
+       <property name="geometry">
+        <rect>
+         <x>240</x>
+         <y>0</y>
+         <width>500</width>
+         <height>500</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>500</width>
+         <height>500</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>500</width>
+         <height>500</height>
+        </size>
+       </property>
+      </widget>
      </widget>
     </item>
     <item>
@@ -165,10 +192,6 @@
          <property name="text">
           <string/>
          </property>
-         <property name="icon">
-          <iconset>
-           <normaloff>../../rainbowBtnImg.png</normaloff>../../rainbowBtnImg.png</iconset>
-         </property>
          <property name="autoRepeat">
           <bool>false</bool>
          </property>
@@ -184,7 +207,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>903</width>
+     <width>1000</width>
      <height>25</height>
     </rect>
    </property>
@@ -263,6 +286,17 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>painter</class>
+   <extends>QWidget</extends>
+   <header>painter.h</header>
+   <container>1</container>
+   <slots>
+    <slot>penWidth(int)</slot>
+   </slots>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections>
   <connection>
@@ -276,7 +310,7 @@
      <y>85</y>
     </hint>
     <hint type="destinationlabel">
-     <x>330</x>
+     <x>379</x>
      <y>84</y>
     </hint>
    </hints>
@@ -288,7 +322,7 @@
    <slot>setValue(int)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>330</x>
+     <x>379</x>
      <y>84</y>
     </hint>
     <hint type="destinationlabel">
@@ -298,4 +332,7 @@
    </hints>
   </connection>
  </connections>
+ <slots>
+  <slot>penWidth(int)</slot>
+ </slots>
 </ui>

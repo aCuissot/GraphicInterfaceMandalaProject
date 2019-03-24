@@ -39,6 +39,7 @@ private:
     bool modified;
     bool scribbling;
     int myPenWidth;
+    int nbSlices;
     QColor myPenColor;
     QImage image;
     QPoint lastPoint;

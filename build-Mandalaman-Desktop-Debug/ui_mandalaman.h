@@ -28,6 +28,7 @@
 #include <QtGui/QToolBar>
 #include <QtGui/QVBoxLayout>
 #include <QtGui/QWidget>
+#include "painter.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -52,6 +53,7 @@ public:
     QCheckBox *checkBox;
     QSlider *gridOpacitySlider;
     QWidget *futurCanevasLayout;
+    painter *paintingZone;
     QWidget *widget;
     QHBoxLayout *horizontalLayout_2;
     QLabel *lineWidthLabel;
@@ -69,7 +71,7 @@ public:
     {
         if (Mandalaman->objectName().isEmpty())
             Mandalaman->setObjectName(QString::fromUtf8("Mandalaman"));
-        Mandalaman->resize(903, 574);
+        Mandalaman->resize(1000, 669);
         actionUndo = new QAction(Mandalaman);
         actionUndo->setObjectName(QString::fromUtf8("actionUndo"));
         actionRedo = new QAction(Mandalaman);
@@ -151,6 +153,11 @@ public:
         futurCanevasLayout = new QWidget(centralWidget);
         futurCanevasLayout->setObjectName(QString::fromUtf8("futurCanevasLayout"));
         futurCanevasLayout->setCursor(QCursor(Qt::CrossCursor));
+        paintingZone = new painter(futurCanevasLayout);
+        paintingZone->setObjectName(QString::fromUtf8("paintingZone"));
+        paintingZone->setGeometry(QRect(240, 0, 500, 500));
+        paintingZone->setMinimumSize(QSize(500, 500));
+        paintingZone->setMaximumSize(QSize(500, 500));
 
         verticalLayout->addWidget(futurCanevasLayout);
 
@@ -184,9 +191,6 @@ public:
 
         rainbowColorBtn = new QPushButton(widget);
         rainbowColorBtn->setObjectName(QString::fromUtf8("rainbowColorBtn"));
-        QIcon icon;
-        icon.addFile(QString::fromUtf8("../../rainbowBtnImg.png"), QSize(), QIcon::Normal, QIcon::Off);
-        rainbowColorBtn->setIcon(icon);
         rainbowColorBtn->setAutoRepeat(false);
 
         horizontalLayout_2->addWidget(rainbowColorBtn);
@@ -197,7 +201,7 @@ public:
         Mandalaman->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(Mandalaman);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 903, 25));
+        menuBar->setGeometry(QRect(0, 0, 1000, 25));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QString::fromUtf8("menuFile"));
         menuEdit = new QMenu(menuBar);
@@ -245,6 +249,7 @@ public:
         mirrorCheckBox->setText(QApplication::translate("Mandalaman", "Mirror", 0, QApplication::UnicodeUTF8));
         resolutionDropDownList->clear();
         resolutionDropDownList->insertItems(0, QStringList()
+         << QApplication::translate("Mandalaman", "500x500", 0, QApplication::UnicodeUTF8)
          << QApplication::translate("Mandalaman", "400x400", 0, QApplication::UnicodeUTF8)
         );
         clearBtn->setText(QApplication::translate("Mandalaman", "Clear", 0, QApplication::UnicodeUTF8));

@@ -16,18 +16,25 @@ Mandalaman::Mandalaman(QWidget *parent) :
     color = QColor(255,255,255);
     nbSlice = 2;
     ui->rainbowColorBtn->setStyleSheet("border-image:url(:rainbowBtnImg.png)");
-
+    connect(ui->lineWidthSlider, SIGNAL(valueChanged(int)), this, SLOT(changePenWidth(int)));
+    connect(ui->clearBtn, SIGNAL(clicked()), this, SLOT(clearFnct()));
+    connect(ui->sliceSlider, SIGNAL(valueChanged(int)), this, SLOT(sliceFnct(int)));
 }
 
 Mandalaman::~Mandalaman()
 {
     delete ui;
 }
-/*
-void Mandalaman::sliceFnct(int nbSlice){
-    mandalaCanvas->setSliceNumber(nbSlice);
+
+void Mandalaman::clearFnct()
+{
+    ui->paintingZone->clearImage();
 }
 
+void Mandalaman::sliceFnct(int nbSlice){
+    ui->paintingZone->setSliceNumber(nbSlice);
+}
+/*
 void Mandalaman::mirrorFnct(bool isMirrorActivated){
     mandalaCanvas->setMirror(isMirrorActivated);
 }
@@ -129,8 +136,15 @@ void Mandalaman::on_actionSave_as_triggered()
 
 void Mandalaman::on_colorBtn_clicked()
 {
-
     QColor col = changeColor();
     QString qss = QString("background-color: %1").arg(col.name());
     ui->colorBtn->setStyleSheet(qss);
+    ui->paintingZone->setPenColor(col);
 }
+
+void Mandalaman::changePenWidth(int w)
+{
+    ui->paintingZone->setPenWidth(w);
+}
+
+
