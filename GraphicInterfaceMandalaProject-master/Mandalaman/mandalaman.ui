@@ -129,8 +129,8 @@
        </property>
        <property name="minimumSize">
         <size>
-         <width>500</width>
-         <height>500</height>
+         <width>300</width>
+         <height>300</height>
         </size>
        </property>
        <property name="maximumSize">
@@ -216,6 +216,8 @@
      <string>File</string>
     </property>
     <addaction name="actionSave_as"/>
+    <addaction name="actionOpen"/>
+    <addaction name="separator"/>
     <addaction name="actionQuit"/>
    </widget>
    <widget class="QMenu" name="menuEdit">
@@ -282,6 +284,14 @@
    </property>
    <property name="shortcut">
     <string>F1</string>
+   </property>
+  </action>
+  <action name="actionOpen">
+   <property name="text">
+    <string>Open</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
    </property>
   </action>
  </widget>

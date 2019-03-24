@@ -19,6 +19,7 @@ Mandalaman::Mandalaman(QWidget *parent) :
     connect(ui->lineWidthSlider, SIGNAL(valueChanged(int)), this, SLOT(changePenWidth(int)));
     connect(ui->clearBtn, SIGNAL(clicked()), this, SLOT(clearFnct()));
     connect(ui->sliceSlider, SIGNAL(valueChanged(int)), this, SLOT(sliceFnct(int)));
+    connect(ui->resolutionDropDownList, SIGNAL(currentIndexChanged(int)), this, SLOT(resolutionFnct(int)));
 }
 
 Mandalaman::~Mandalaman()
@@ -34,14 +35,25 @@ void Mandalaman::clearFnct()
 void Mandalaman::sliceFnct(int nbSlice){
     ui->paintingZone->setSliceNumber(nbSlice);
 }
+
+void Mandalaman::resolutionFnct(int resNber){
+    switch(resNber){
+        case 1:
+            ui->paintingZone->resize(QSize(400,400));
+            break;
+        case 2:
+            ui->paintingZone->resize(QSize(300,300));
+            break;
+        default:
+            ui->paintingZone->resize(QSize(500,500));
+    }
+}
+
 /*
 void Mandalaman::mirrorFnct(bool isMirrorActivated){
     mandalaCanvas->setMirror(isMirrorActivated);
 }
 
-void Mandalaman::clearFnct(){
-    mandalaCanvas->clear();
-}
 
 void Mandalaman::resolutionFnct(int resNber){
     switch(resNber){
@@ -88,11 +100,14 @@ QColor Mandalaman::changeColor()
     return newColor;
 }
 
-void Mandalaman::saveToFile()
+void Mandalaman::saveToFile(const QByteArray &fileFormat)
 {
     QString fileName = QFileDialog::getSaveFileName(this,
         tr("Save Mandala"), "",
         tr("JPG image (*.jpg);;PNG image (*.png);;All Files (*)"));
+
+    ui->paintingZone->saveImage(fileName);
+
 }
 
 void Mandalaman::closeApp(){
@@ -131,7 +146,9 @@ void Mandalaman::on_actionAbout_triggered()
 
 void Mandalaman::on_actionSave_as_triggered()
 {
-    saveToFile();
+    QAction *action = qobject_cast<QAction *>(sender());
+    QByteArray fileFormat = action->data().toByteArray();
+    saveToFile(fileFormat);
 }
 
 void Mandalaman::on_colorBtn_clicked()
@@ -148,3 +165,11 @@ void Mandalaman::changePenWidth(int w)
 }
 
 
+
+void Mandalaman::on_actionOpen_triggered()
+{
+    QString fileName = QFileDialog::getOpenFileName(this,
+                               tr("Open File"), QDir::currentPath());
+    if (!fileName.isEmpty())
+        ui->paintingZone->openImage(fileName);
+}

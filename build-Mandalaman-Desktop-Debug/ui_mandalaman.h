@@ -40,6 +40,7 @@ public:
     QAction *actionSave_as;
     QAction *actionQuit;
     QAction *actionAbout;
+    QAction *actionOpen;
     QWidget *centralWidget;
     QVBoxLayout *verticalLayout;
     QWidget *upperToolBar;
@@ -82,6 +83,8 @@ public:
         actionQuit->setObjectName(QString::fromUtf8("actionQuit"));
         actionAbout = new QAction(Mandalaman);
         actionAbout->setObjectName(QString::fromUtf8("actionAbout"));
+        actionOpen = new QAction(Mandalaman);
+        actionOpen->setObjectName(QString::fromUtf8("actionOpen"));
         centralWidget = new QWidget(Mandalaman);
         centralWidget->setObjectName(QString::fromUtf8("centralWidget"));
         verticalLayout = new QVBoxLayout(centralWidget);
@@ -156,7 +159,7 @@ public:
         paintingZone = new painter(futurCanevasLayout);
         paintingZone->setObjectName(QString::fromUtf8("paintingZone"));
         paintingZone->setGeometry(QRect(240, 0, 500, 500));
-        paintingZone->setMinimumSize(QSize(500, 500));
+        paintingZone->setMinimumSize(QSize(300, 300));
         paintingZone->setMaximumSize(QSize(500, 500));
 
         verticalLayout->addWidget(futurCanevasLayout);
@@ -220,6 +223,8 @@ public:
         menuBar->addAction(menuEdit->menuAction());
         menuBar->addAction(menuHelp->menuAction());
         menuFile->addAction(actionSave_as);
+        menuFile->addAction(actionOpen);
+        menuFile->addSeparator();
         menuFile->addAction(actionQuit);
         menuEdit->addAction(actionUndo);
         menuEdit->addAction(actionRedo);
@@ -245,6 +250,8 @@ public:
         actionQuit->setShortcut(QApplication::translate("Mandalaman", "Ctrl+Q", 0, QApplication::UnicodeUTF8));
         actionAbout->setText(QApplication::translate("Mandalaman", "About", 0, QApplication::UnicodeUTF8));
         actionAbout->setShortcut(QApplication::translate("Mandalaman", "F1", 0, QApplication::UnicodeUTF8));
+        actionOpen->setText(QApplication::translate("Mandalaman", "Open", 0, QApplication::UnicodeUTF8));
+        actionOpen->setShortcut(QApplication::translate("Mandalaman", "Ctrl+O", 0, QApplication::UnicodeUTF8));
         sliceLabel->setText(QApplication::translate("Mandalaman", "Slice", 0, QApplication::UnicodeUTF8));
         mirrorCheckBox->setText(QApplication::translate("Mandalaman", "Mirror", 0, QApplication::UnicodeUTF8));
         resolutionDropDownList->clear();

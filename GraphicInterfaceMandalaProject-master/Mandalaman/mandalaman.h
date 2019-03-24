@@ -25,24 +25,25 @@ private:
     NelsonMandala * mandalaCanvas;
     int nbSlice;
     QColor color;
+    QList<QAction *> saveAsActs;
+
 
 private slots:
 
 
     /*
     void mirrorFnct(bool);
-    void clearFnct();
-    void resolutionFnct(int);
     void gridFnct(bool);
     void gridTransparency(int);
-    void lineWidth(int);
-    void color();
     void rainbowColor();
     */
+
+    void resolutionFnct(int);
+
     void sliceFnct(int);
 
     void clearFnct();
-    void saveToFile();
+    void saveToFile(const QByteArray &fileFormat);
     QColor changeColor();
     void closeApp();
     void about();
@@ -51,6 +52,7 @@ private slots:
     void on_actionSave_as_triggered();
     void on_colorBtn_clicked();
     void changePenWidth(int);
+    void on_actionOpen_triggered();
 };
 
 #endif // MANDALAMAN_H

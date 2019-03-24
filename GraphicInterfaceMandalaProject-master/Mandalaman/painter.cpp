@@ -57,12 +57,12 @@ bool painter::openImage(const QString &fileName)
     return true;
 }
 
-bool painter::saveImage(const QString &fileName, const char *fileFormat)
+bool painter::saveImage(const QString &fileName/*, const char *fileFormat*/)
 {
     QImage visibleImage = image;
     resizeImage(&visibleImage, size());
 
-    if (visibleImage.save(fileName, fileFormat)) {
+    if (visibleImage.save(fileName/*, fileFormat*/)) {
         modified = false;
         return true;
     } else {
@@ -105,9 +105,9 @@ void painter::mouseMoveEvent(QMouseEvent *event)
     if ((event->buttons() & Qt::LeftButton) && scribbling){
         if (nbSlices!=1){
             QPoint p = event->pos();
-            coordonneesSpheriques c = pointToSpheric(p, 250);
+            coordonneesSpheriques c = pointToSpheric(p, height()/2);
             for (int i = 0; i < nbSlices; ++ i){
-                drawLineTo(sphericToPoint(c,250));
+                drawLineTo(sphericToPoint(c,height()/2));
                 c = rotation(c, nbSlices);
             }
         } else {
@@ -121,9 +121,9 @@ void painter::mouseReleaseEvent(QMouseEvent *event)
     if (event->button() == Qt::LeftButton && scribbling) {
         if (nbSlices!=1){
             QPoint p = event->pos();
-            coordonneesSpheriques c = pointToSpheric(p, 250);
+            coordonneesSpheriques c = pointToSpheric(p, height()/2);
             for (int i = 0; i < nbSlices; ++ i){
-                drawLineTo(sphericToPoint(c,250));
+                drawLineTo(sphericToPoint(c,height()/2));
                 c = rotation(c, nbSlices);
             }
             scribbling = false;

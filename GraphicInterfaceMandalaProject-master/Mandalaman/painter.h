@@ -15,7 +15,7 @@ public:
     painter(QWidget *parent = 0);
 
     bool openImage(const QString &fileName);
-    bool saveImage(const QString &fileName, const char *fileFormat);
+    bool saveImage(const QString &fileName/*, const char *fileFormat*/);
     void setPenColor(const QColor &newColor);
     void setPenWidth(int newWidth);
 
@@ -46,5 +46,7 @@ private:
     QColor myPenColor;
     QImage image;
     QPoint lastPoint;
+    QImage grid;
+
 };
 #endif // PAINTER_H
