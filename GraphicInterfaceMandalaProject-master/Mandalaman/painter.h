@@ -36,7 +36,7 @@ protected:
     void resizeEvent(QResizeEvent *event) override;
 
 private:
-    void drawLineTo(const QPoint &endPoint);
+    void drawLineTo(const QPoint &endPoint, int slice);
     void resizeImage(QImage *image, const QSize &newSize);
 
     bool modified;
@@ -47,6 +47,8 @@ private:
     QImage image;
     QPoint lastPoint;
     QImage grid;
+    QPoint lastPoints[20];
+
 
 };
 #endif // PAINTER_H

@@ -5,22 +5,22 @@
 #include <QMouseEvent>
 #include <QPainter>
 
-typedef struct coordonneesSpheriques{
+typedef struct coordonneesPolaires{
     double r;
     double theta;
-}coordonneesSpheriques;
+}coordonneesPolaires;
 
-coordonneesSpheriques pointToSpheric(QPoint p, int mid){
+coordonneesPolaires pointTopolar(QPoint p, int mid){
     int x, y;
     x=p.x()-mid;
     y=p.y()-mid;
-    coordonneesSpheriques c;
+    coordonneesPolaires c;
     c.r = sqrt(x*x + y*y);
     c.theta = tan((double)y/x);
     return c;
 }
 
-coordonneesSpheriques rotation(coordonneesSpheriques c, int nbSlices){
+coordonneesPolaires rotation(coordonneesPolaires c, int nbSlices){
     c.theta+=2*PI/nbSlices;
     if (c.theta>2*PI){
         c.theta-=2*PI;
@@ -28,7 +28,7 @@ coordonneesSpheriques rotation(coordonneesSpheriques c, int nbSlices){
     return c;
 }
 
-QPoint sphericToPoint(coordonneesSpheriques c, int mid){
+QPoint polarToPoint(coordonneesPolaires c, int mid){
     return QPoint((int) c.r*cos(c.theta) + mid, (int) c.r*sin(c.theta) + mid);
 }
 
@@ -41,6 +41,7 @@ painter::painter(QWidget *parent)
     myPenWidth = 1;
     myPenColor = Qt::blue;
     nbSlices=1;
+    
 }
 
 bool painter::openImage(const QString &fileName)
@@ -95,8 +96,18 @@ void painter::clearImage()
 void painter::mousePressEvent(QMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton) {
-        lastPoint = event->pos();
+        if (nbSlices!=1){
+            QPoint p = event->pos();
+            coordonneesPolaires c = pointTopolar(p, height()/2);
+            for (int i = 0; i < nbSlices; ++ i){
+                lastPoints[i] = polarToPoint(c,height()/2);
+                c = rotation(c, nbSlices);
+            }
+        } else {
+            lastPoint = event->pos();
+        }
         scribbling = true;
+
     }
 }
 
@@ -105,13 +116,13 @@ void painter::mouseMoveEvent(QMouseEvent *event)
     if ((event->buttons() & Qt::LeftButton) && scribbling){
         if (nbSlices!=1){
             QPoint p = event->pos();
-            coordonneesSpheriques c = pointToSpheric(p, height()/2);
+            coordonneesPolaires c = pointTopolar(p, height()/2);
             for (int i = 0; i < nbSlices; ++ i){
-                drawLineTo(sphericToPoint(c,height()/2));
+                drawLineTo(polarToPoint(c,height()/2), i);
                 c = rotation(c, nbSlices);
             }
         } else {
-            drawLineTo(event->pos());
+            drawLineTo(event->pos(), 0);
         }
     }
 }
@@ -121,14 +132,14 @@ void painter::mouseReleaseEvent(QMouseEvent *event)
     if (event->button() == Qt::LeftButton && scribbling) {
         if (nbSlices!=1){
             QPoint p = event->pos();
-            coordonneesSpheriques c = pointToSpheric(p, height()/2);
+            coordonneesPolaires c = pointTopolar(p, height()/2);
             for (int i = 0; i < nbSlices; ++ i){
-                drawLineTo(sphericToPoint(c,height()/2));
+                drawLineTo(polarToPoint(c,height()/2), i);
                 c = rotation(c, nbSlices);
             }
             scribbling = false;
         } else {
-            drawLineTo(event->pos());
+            drawLineTo(event->pos(),0);
             scribbling = false;
         }
     }
@@ -152,18 +163,29 @@ void painter::resizeEvent(QResizeEvent *event)
     QWidget::resizeEvent(event);
 }
 
-void painter::drawLineTo(const QPoint &endPoint)
+void painter::drawLineTo(const QPoint &endPoint, int slice)
 {
     QPainter painter(&image);
     painter.setPen(QPen(myPenColor, myPenWidth, Qt::SolidLine, Qt::RoundCap,
                         Qt::RoundJoin));
-    painter.drawLine(lastPoint, endPoint);
-    modified = true;
 
-    int rad = (myPenWidth / 2) + 2;
-    update(QRect(lastPoint, endPoint).normalized()
-                                     .adjusted(-rad, -rad, +rad, +rad));
-    lastPoint = endPoint;
+    if (nbSlices == 1){
+        painter.drawLine(lastPoint, endPoint);
+        modified = true;
+
+        int rad = (myPenWidth / 2) + 2;
+        update(QRect(lastPoint, endPoint).normalized()
+                                         .adjusted(-rad, -rad, +rad, +rad));
+        lastPoint = endPoint;
+    }else{
+        painter.drawLine(lastPoints[slice], endPoint);
+        modified = true;
+
+        int rad = (myPenWidth / 2) + 2;
+        update(QRect(lastPoints[slice], endPoint).normalized()
+                                         .adjusted(-rad, -rad, +rad, +rad));
+        lastPoints[slice] = endPoint;
+    }
 }
 
 void painter::resizeImage(QImage *image, const QSize &newSize)

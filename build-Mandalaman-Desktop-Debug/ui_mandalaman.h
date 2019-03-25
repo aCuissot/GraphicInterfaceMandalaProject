@@ -182,7 +182,8 @@ public:
         lineWidthSlider->setMinimum(1);
         lineWidthSlider->setMaximum(10);
         lineWidthSlider->setPageStep(3);
-        lineWidthSlider->setSliderPosition(5);
+        lineWidthSlider->setValue(1);
+        lineWidthSlider->setSliderPosition(1);
         lineWidthSlider->setOrientation(Qt::Horizontal);
 
         horizontalLayout_2->addWidget(lineWidthSlider);
