@@ -5,6 +5,8 @@
 #include <QMouseEvent>
 #include <QPainter>
 
+
+/*
 typedef struct coordonneesPolaires{
     double r;
     double theta;
@@ -31,7 +33,7 @@ coordonneesPolaires rotation(coordonneesPolaires c, int nbSlices){
 QPoint polarToPoint(coordonneesPolaires c, int mid){
     return QPoint((int) c.r*cos(c.theta) + mid, (int) c.r*sin(c.theta) + mid);
 }
-
+*/
 painter::painter(QWidget *parent)
     : QWidget(parent)
 {
@@ -98,10 +100,12 @@ void painter::mousePressEvent(QMouseEvent *event)
     if (event->button() == Qt::LeftButton) {
         if (nbSlices!=1){
             QPoint p = event->pos();
-            coordonneesPolaires c = pointTopolar(p, height()/2);
+            //coordonneesPolaires c = pointTopolar(p, height()/2);
             for (int i = 0; i < nbSlices; ++ i){
-                lastPoints[i] = polarToPoint(c,height()/2);
-                c = rotation(c, nbSlices);
+                QTransform transform = QTransform().translate(-height()/2, -height()/2).rotate(360*i/nbSlices).translate(height()/2, height()/2);
+                lastPoints[i] = transform.map(p);
+                //lastPoints[i] = polarToPoint(c,height()/2);
+                //c = rotation(c, nbSlices);
             }
         } else {
             lastPoint = event->pos();
@@ -116,10 +120,13 @@ void painter::mouseMoveEvent(QMouseEvent *event)
     if ((event->buttons() & Qt::LeftButton) && scribbling){
         if (nbSlices!=1){
             QPoint p = event->pos();
-            coordonneesPolaires c = pointTopolar(p, height()/2);
+            //coordonneesPolaires c = pointTopolar(p, height()/2);
             for (int i = 0; i < nbSlices; ++ i){
-                drawLineTo(polarToPoint(c,height()/2), i);
-                c = rotation(c, nbSlices);
+                QTransform transform = QTransform().translate(-height()/2, -height()/2).rotate(360*i/nbSlices).translate(height()/2, height()/2);
+
+                //drawLineTo(polarToPoint(c,height()/2), i);
+                drawLineTo(transform.map(p),i);
+                //c = rotation(c, nbSlices);
             }
         } else {
             drawLineTo(event->pos(), 0);
@@ -132,10 +139,14 @@ void painter::mouseReleaseEvent(QMouseEvent *event)
     if (event->button() == Qt::LeftButton && scribbling) {
         if (nbSlices!=1){
             QPoint p = event->pos();
-            coordonneesPolaires c = pointTopolar(p, height()/2);
+
+            //coordonneesPolaires c = pointTopolar(p, height()/2);
             for (int i = 0; i < nbSlices; ++ i){
-                drawLineTo(polarToPoint(c,height()/2), i);
-                c = rotation(c, nbSlices);
+                //drawLineTo(polarToPoint(c,height()/2), i);
+                QTransform transform = QTransform().translate(-height()/2, -height()/2).rotate(360*i/nbSlices).translate(height()/2, height()/2);
+
+                drawLineTo(transform.map(p),i);
+                //c = rotation(c, nbSlices);
             }
             scribbling = false;
         } else {
@@ -184,7 +195,10 @@ void painter::drawLineTo(const QPoint &endPoint, int slice)
         int rad = (myPenWidth / 2) + 2;
         update(QRect(lastPoints[slice], endPoint).normalized()
                                          .adjusted(-rad, -rad, +rad, +rad));
-        lastPoints[slice] = endPoint;
+        QTransform transform = QTransform().translate(-height()/2, -height()/2).rotate(360*slice/nbSlices).translate(height()/2, height()/2);
+        lastPoints[slice] = transform.map(endPoint);
+
+        //lastPoints[slice] = endPoint;
     }
 }
 
