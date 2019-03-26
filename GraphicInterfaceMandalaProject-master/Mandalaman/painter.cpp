@@ -34,6 +34,8 @@ QPoint polarToPoint(coordonneesPolaires c, int mid){
     return QPoint((int) c.r*cos(c.theta) + mid, (int) c.r*sin(c.theta) + mid);
 }
 */
+
+
 painter::painter(QWidget *parent)
     : QWidget(parent)
 {
@@ -102,7 +104,7 @@ void painter::mousePressEvent(QMouseEvent *event)
             QPoint p = event->pos();
             //coordonneesPolaires c = pointTopolar(p, height()/2);
             for (int i = 0; i < nbSlices; ++ i){
-                QTransform transform = QTransform().translate(-height()/2, -height()/2).rotate(360*i/nbSlices).translate(height()/2, height()/2);
+                QTransform transform = QTransform().translate(height()/2, height()/2).rotate(360*i/nbSlices).translate(-height()/2, -height()/2);
                 lastPoints[i] = transform.map(p);
                 //lastPoints[i] = polarToPoint(c,height()/2);
                 //c = rotation(c, nbSlices);
@@ -122,10 +124,9 @@ void painter::mouseMoveEvent(QMouseEvent *event)
             QPoint p = event->pos();
             //coordonneesPolaires c = pointTopolar(p, height()/2);
             for (int i = 0; i < nbSlices; ++ i){
-                QTransform transform = QTransform().translate(-height()/2, -height()/2).rotate(360*i/nbSlices).translate(height()/2, height()/2);
-
-                //drawLineTo(polarToPoint(c,height()/2), i);
+                QTransform transform = QTransform().translate(height()/2, height()/2).rotate(360*i/nbSlices).translate(-height()/2, -height()/2);
                 drawLineTo(transform.map(p),i);
+                //drawLineTo(polarToPoint(c,height()/2), i);
                 //c = rotation(c, nbSlices);
             }
         } else {
@@ -139,14 +140,12 @@ void painter::mouseReleaseEvent(QMouseEvent *event)
     if (event->button() == Qt::LeftButton && scribbling) {
         if (nbSlices!=1){
             QPoint p = event->pos();
-
             //coordonneesPolaires c = pointTopolar(p, height()/2);
             for (int i = 0; i < nbSlices; ++ i){
                 //drawLineTo(polarToPoint(c,height()/2), i);
-                QTransform transform = QTransform().translate(-height()/2, -height()/2).rotate(360*i/nbSlices).translate(height()/2, height()/2);
-
-                drawLineTo(transform.map(p),i);
                 //c = rotation(c, nbSlices);
+                QTransform transform = QTransform().translate(height()/2,height()/2).rotate(360*i/nbSlices).translate(-height()/2, -height()/2);
+                drawLineTo(transform.map(p),i);
             }
             scribbling = false;
         } else {
@@ -195,10 +194,8 @@ void painter::drawLineTo(const QPoint &endPoint, int slice)
         int rad = (myPenWidth / 2) + 2;
         update(QRect(lastPoints[slice], endPoint).normalized()
                                          .adjusted(-rad, -rad, +rad, +rad));
-        QTransform transform = QTransform().translate(-height()/2, -height()/2).rotate(360*slice/nbSlices).translate(height()/2, height()/2);
-        lastPoints[slice] = transform.map(endPoint);
-
         //lastPoints[slice] = endPoint;
+        lastPoints[slice] = endPoint;
     }
 }
 

@@ -23,6 +23,7 @@ public:
     QColor penColor() const { return myPenColor; }
     int penWidth() const { return myPenWidth; }
     void setSliceNumber(int);
+    void doGrid(int);
 
 public slots:
     void clearImage();
