@@ -1,7 +1,6 @@
 
 #include "mandalaman.h"
 #include "ui_mandalaman.h"
-//#include "nelsonMandala.h"
 #include "qmessagebox.h"
 #include "qfiledialog.h"
 #include "qcolordialog.h"
@@ -15,11 +14,12 @@ Mandalaman::Mandalaman(QWidget *parent) :
     //mandalaCanvas = new NelsonMandala();
     color = QColor(255,255,255);
     nbSlice = 2;
-    ui->rainbowColorBtn->setStyleSheet("border-image:url(:rainbowBtnImg.png)");
+
     connect(ui->lineWidthSlider, SIGNAL(valueChanged(int)), this, SLOT(changePenWidth(int)));
     connect(ui->clearBtn, SIGNAL(clicked()), this, SLOT(clearFnct()));
     connect(ui->sliceSlider, SIGNAL(valueChanged(int)), this, SLOT(sliceFnct(int)));
     connect(ui->resolutionDropDownList, SIGNAL(currentIndexChanged(int)), this, SLOT(resolutionFnct(int)));
+    connect(ui->rainbowColorBtn, SIGNAL(clicked()), this, SLOT (rainbowColor()));
 }
 
 Mandalaman::~Mandalaman()
@@ -49,23 +49,14 @@ void Mandalaman::resolutionFnct(int resNber){
     }
 }
 
-/*
-void Mandalaman::mirrorFnct(bool isMirrorActivated){
-    mandalaCanvas->setMirror(isMirrorActivated);
+void Mandalaman::rainbowColor(){
+    ui->paintingZone->setRainbow();
 }
 
 
-void Mandalaman::resolutionFnct(int resNber){
-    switch(resNber){
-        case 1:
-            mandalaCanvas->setResolution(500,500);
-            break;
-        case 2:
-            mandalaCanvas->setResolution(400,400);
-            break;
-        default:
-            mandalaCanvas->setResolution(300,300);
-    }
+/*
+void Mandalaman::mirrorFnct(bool isMirrorActivated){
+    mandalaCanvas->setMirror(isMirrorActivated);
 }
 
 void Mandalaman::gridFnct(bool displayGrid){
@@ -83,12 +74,8 @@ void Mandalaman::lineWidth(int width){
 void Mandalaman::color(){
 
 }
-
-void Mandalaman::rainbowColor(){
-
-}
-
 */
+
 
 QColor Mandalaman::changeColor()
 {
@@ -128,7 +115,7 @@ void Mandalaman::about()
     QMessageBox::StandardButton button;
     button = QMessageBox::information(this,
                                    "Mandala Maker",
-                                   "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+                                   "Ceci est une application de Mandala certifiée"
                                    "Copyright",
                                    QMessageBox::Yes );
 }

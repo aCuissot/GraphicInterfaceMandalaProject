@@ -23,7 +23,8 @@ public:
     QColor penColor() const { return myPenColor; }
     int penWidth() const { return myPenWidth; }
     void setSliceNumber(int);
-    void doGrid(int);
+    void doGrid();
+    void setRainbow();
 
 public slots:
     void clearImage();
@@ -42,6 +43,7 @@ private:
 
     bool modified;
     bool scribbling;
+    bool rainbow;
     int myPenWidth;
     int nbSlices;
     QColor myPenColor;
@@ -49,7 +51,5 @@ private:
     QPoint lastPoint;
     QImage grid;
     QPoint lastPoints[20];
-
-
 };
 #endif // PAINTER_H

@@ -45,7 +45,7 @@ painter::painter(QWidget *parent)
     myPenWidth = 1;
     myPenColor = Qt::blue;
     nbSlices=1;
-    
+    rainbow = false;
 }
 
 bool painter::openImage(const QString &fileName)
@@ -89,6 +89,18 @@ void painter::setSliceNumber(int n)
 {
     nbSlices = n;
 }
+
+void painter::doGrid()
+{
+    grid;
+}
+
+void painter::setRainbow()
+{
+    rainbow = !rainbow;
+}
+
+
 
 void painter::clearImage()
 {
@@ -160,6 +172,7 @@ void painter::paintEvent(QPaintEvent *event)
     QPainter painter(this);
     QRect dirtyRect = event->rect();
     painter.drawImage(dirtyRect, image, dirtyRect);
+
 }
 
 void painter::resizeEvent(QResizeEvent *event)
@@ -175,11 +188,12 @@ void painter::resizeEvent(QResizeEvent *event)
 
 void painter::drawLineTo(const QPoint &endPoint, int slice)
 {
-    QPainter painter(&image);
-    painter.setPen(QPen(myPenColor, myPenWidth, Qt::SolidLine, Qt::RoundCap,
-                        Qt::RoundJoin));
+
 
     if (nbSlices == 1){
+        QPainter painter(&image);
+        painter.setPen(QPen(myPenColor, myPenWidth, Qt::SolidLine, Qt::RoundCap,
+                            Qt::RoundJoin));
         painter.drawLine(lastPoint, endPoint);
         modified = true;
 
@@ -188,6 +202,15 @@ void painter::drawLineTo(const QPoint &endPoint, int slice)
                                          .adjusted(-rad, -rad, +rad, +rad));
         lastPoint = endPoint;
     }else{
+        QPainter painter(&image);
+        if (rainbow){
+            QColor hsvColor = myPenColor.toHsv();
+            painter.setPen(QPen(QColor::fromHsv((hsvColor.hue()+360*slice/nbSlices)%360, hsvColor.saturation(), hsvColor.value()), myPenWidth, Qt::SolidLine, Qt::RoundCap,
+                                Qt::RoundJoin));
+        } else {
+            painter.setPen(QPen(myPenColor, myPenWidth, Qt::SolidLine, Qt::RoundCap,
+                                Qt::RoundJoin));
+        }
         painter.drawLine(lastPoints[slice], endPoint);
         modified = true;
 

@@ -195,6 +195,10 @@ public:
 
         rainbowColorBtn = new QPushButton(widget);
         rainbowColorBtn->setObjectName(QString::fromUtf8("rainbowColorBtn"));
+        rainbowColorBtn->setMinimumSize(QSize(16, 16));
+        QIcon icon;
+        icon.addFile(QString::fromUtf8("../../rainbowBtnImg.png"), QSize(), QIcon::Normal, QIcon::Off);
+        rainbowColorBtn->setIcon(icon);
         rainbowColorBtn->setAutoRepeat(false);
 
         horizontalLayout_2->addWidget(rainbowColorBtn);

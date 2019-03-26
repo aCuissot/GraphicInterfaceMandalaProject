@@ -192,8 +192,18 @@
        </item>
        <item>
         <widget class="QPushButton" name="rainbowColorBtn">
+         <property name="minimumSize">
+          <size>
+           <width>16</width>
+           <height>16</height>
+          </size>
+         </property>
          <property name="text">
           <string/>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normaloff>../../rainbowBtnImg.png</normaloff>../../rainbowBtnImg.png</iconset>
          </property>
          <property name="autoRepeat">
           <bool>false</bool>
