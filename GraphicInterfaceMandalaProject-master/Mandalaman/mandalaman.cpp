@@ -15,11 +15,13 @@ Mandalaman::Mandalaman(QWidget *parent) :
     color = QColor(255,255,255);
     nbSlice = 2;
 
+
     connect(ui->lineWidthSlider, SIGNAL(valueChanged(int)), this, SLOT(changePenWidth(int)));
     connect(ui->clearBtn, SIGNAL(clicked()), this, SLOT(clearFnct()));
     connect(ui->sliceSlider, SIGNAL(valueChanged(int)), this, SLOT(sliceFnct(int)));
     connect(ui->resolutionDropDownList, SIGNAL(currentIndexChanged(int)), this, SLOT(resolutionFnct(int)));
     connect(ui->rainbowColorBtn, SIGNAL(clicked()), this, SLOT (rainbowColor()));
+    connect(ui->mirrorCheckBox, SIGNAL(clicked()), this, SLOT(mirrorFnct()));
 }
 
 Mandalaman::~Mandalaman()
@@ -54,11 +56,11 @@ void Mandalaman::rainbowColor(){
 }
 
 
-/*
-void Mandalaman::mirrorFnct(bool isMirrorActivated){
-    mandalaCanvas->setMirror(isMirrorActivated);
-}
 
+void Mandalaman::mirrorFnct(){
+    ui->paintingZone->setMirror();
+}
+/*
 void Mandalaman::gridFnct(bool displayGrid){
     mandalaCanvas->displayGrid(nbSlice, displayGrid);
 }

@@ -22,7 +22,7 @@ static const uint qt_meta_data_Mandalaman[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-      14,   14, // methods
+      15,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -31,25 +31,26 @@ static const uint qt_meta_data_Mandalaman[] = {
 
  // slots: signature, parameters, type, tag, flags
       12,   11,   11,   11, 0x08,
-      27,   11,   11,   11, 0x08,
-      47,   11,   11,   11, 0x08,
-      62,   11,   11,   11, 0x08,
-      85,   74,   11,   11, 0x08,
-     115,   11,  108,   11, 0x08,
-     129,   11,   11,   11, 0x08,
-     140,   11,   11,   11, 0x08,
-     148,   11,   11,   11, 0x08,
-     174,   11,   11,   11, 0x08,
-     201,   11,   11,   11, 0x08,
-     230,   11,   11,   11, 0x08,
-     252,   11,   11,   11, 0x08,
-     272,   11,   11,   11, 0x08,
+      25,   11,   11,   11, 0x08,
+      40,   11,   11,   11, 0x08,
+      60,   11,   11,   11, 0x08,
+      75,   11,   11,   11, 0x08,
+      98,   87,   11,   11, 0x08,
+     128,   11,  121,   11, 0x08,
+     142,   11,   11,   11, 0x08,
+     153,   11,   11,   11, 0x08,
+     161,   11,   11,   11, 0x08,
+     187,   11,   11,   11, 0x08,
+     214,   11,   11,   11, 0x08,
+     243,   11,   11,   11, 0x08,
+     265,   11,   11,   11, 0x08,
+     285,   11,   11,   11, 0x08,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_Mandalaman[] = {
-    "Mandalaman\0\0rainbowColor()\0"
+    "Mandalaman\0\0mirrorFnct()\0rainbowColor()\0"
     "resolutionFnct(int)\0sliceFnct(int)\0"
     "clearFnct()\0fileFormat\0saveToFile(QByteArray)\0"
     "QColor\0changeColor()\0closeApp()\0about()\0"
@@ -66,21 +67,22 @@ void Mandalaman::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         Q_ASSERT(staticMetaObject.cast(_o));
         Mandalaman *_t = static_cast<Mandalaman *>(_o);
         switch (_id) {
-        case 0: _t->rainbowColor(); break;
-        case 1: _t->resolutionFnct((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 2: _t->sliceFnct((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 3: _t->clearFnct(); break;
-        case 4: _t->saveToFile((*reinterpret_cast< const QByteArray(*)>(_a[1]))); break;
-        case 5: { QColor _r = _t->changeColor();
+        case 0: _t->mirrorFnct(); break;
+        case 1: _t->rainbowColor(); break;
+        case 2: _t->resolutionFnct((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 3: _t->sliceFnct((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 4: _t->clearFnct(); break;
+        case 5: _t->saveToFile((*reinterpret_cast< const QByteArray(*)>(_a[1]))); break;
+        case 6: { QColor _r = _t->changeColor();
             if (_a[0]) *reinterpret_cast< QColor*>(_a[0]) = _r; }  break;
-        case 6: _t->closeApp(); break;
-        case 7: _t->about(); break;
-        case 8: _t->on_actionQuit_triggered(); break;
-        case 9: _t->on_actionAbout_triggered(); break;
-        case 10: _t->on_actionSave_as_triggered(); break;
-        case 11: _t->on_colorBtn_clicked(); break;
-        case 12: _t->changePenWidth((*reinterpret_cast< int(*)>(_a[1]))); break;
-        case 13: _t->on_actionOpen_triggered(); break;
+        case 7: _t->closeApp(); break;
+        case 8: _t->about(); break;
+        case 9: _t->on_actionQuit_triggered(); break;
+        case 10: _t->on_actionAbout_triggered(); break;
+        case 11: _t->on_actionSave_as_triggered(); break;
+        case 12: _t->on_colorBtn_clicked(); break;
+        case 13: _t->changePenWidth((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 14: _t->on_actionOpen_triggered(); break;
         default: ;
         }
     }
@@ -118,9 +120,9 @@ int Mandalaman::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 14)
+        if (_id < 15)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 14;
+        _id -= 15;
     }
     return _id;
 }

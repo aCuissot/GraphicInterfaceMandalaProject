@@ -46,6 +46,7 @@ painter::painter(QWidget *parent)
     myPenColor = Qt::blue;
     nbSlices=1;
     rainbow = false;
+    mirror = false;
 }
 
 bool painter::openImage(const QString &fileName)
@@ -87,7 +88,11 @@ void painter::setPenWidth(int newWidth)
 
 void painter::setSliceNumber(int n)
 {
-    nbSlices = n;
+    if(mirror){
+        nbSlices = 2*n;
+    } else {
+        nbSlices = n;
+    }
 }
 
 void painter::doGrid()
@@ -98,6 +103,16 @@ void painter::doGrid()
 void painter::setRainbow()
 {
     rainbow = !rainbow;
+}
+
+void painter::setMirror()
+{
+    mirror = !mirror;
+    if (mirror){
+        nbSlices*=2;
+    }else{
+        nbSlices/=2;
+    }
 }
 
 
@@ -116,8 +131,14 @@ void painter::mousePressEvent(QMouseEvent *event)
             QPoint p = event->pos();
             //coordonneesPolaires c = pointTopolar(p, height()/2);
             for (int i = 0; i < nbSlices; ++ i){
-                QTransform transform = QTransform().translate(height()/2, height()/2).rotate(360*i/nbSlices).translate(-height()/2, -height()/2);
-                lastPoints[i] = transform.map(p);
+                if (mirror && i%2==1){
+                    QTransform transform = QTransform().translate(height()/2, height()/2).rotate(360*i/nbSlices).scale(-1,1).translate(-height()/2, -height()/2);
+                    lastPoints[i] = transform.map(p);
+                }else{
+                    QTransform transform = QTransform().translate(height()/2, height()/2).rotate(360*i/nbSlices).translate(-height()/2, -height()/2);
+                    lastPoints[i] = transform.map(p);
+                }
+
                 //lastPoints[i] = polarToPoint(c,height()/2);
                 //c = rotation(c, nbSlices);
             }
@@ -136,8 +157,13 @@ void painter::mouseMoveEvent(QMouseEvent *event)
             QPoint p = event->pos();
             //coordonneesPolaires c = pointTopolar(p, height()/2);
             for (int i = 0; i < nbSlices; ++ i){
-                QTransform transform = QTransform().translate(height()/2, height()/2).rotate(360*i/nbSlices).translate(-height()/2, -height()/2);
-                drawLineTo(transform.map(p),i);
+                if (mirror && i%2==1){
+                    QTransform transform = QTransform().translate(height()/2,height()/2).rotate(360*i/nbSlices).scale(-1,1).translate(-height()/2, -height()/2);
+                    drawLineTo(transform.map(p),i);
+                }else{
+                    QTransform transform = QTransform().translate(height()/2,height()/2).rotate(360*i/nbSlices).translate(-height()/2, -height()/2);
+                    drawLineTo(transform.map(p),i);
+                }
                 //drawLineTo(polarToPoint(c,height()/2), i);
                 //c = rotation(c, nbSlices);
             }
@@ -156,8 +182,14 @@ void painter::mouseReleaseEvent(QMouseEvent *event)
             for (int i = 0; i < nbSlices; ++ i){
                 //drawLineTo(polarToPoint(c,height()/2), i);
                 //c = rotation(c, nbSlices);
-                QTransform transform = QTransform().translate(height()/2,height()/2).rotate(360*i/nbSlices).translate(-height()/2, -height()/2);
-                drawLineTo(transform.map(p),i);
+                if (mirror && i%2==1){
+                    QTransform transform = QTransform().translate(height()/2,height()/2).rotate(360*i/nbSlices).scale(-1,1).translate(-height()/2, -height()/2);
+                    drawLineTo(transform.map(p),i);
+                }else{
+                    QTransform transform = QTransform().translate(height()/2,height()/2).rotate(360*i/nbSlices).translate(-height()/2, -height()/2);
+                    drawLineTo(transform.map(p),i);
+                }
+
             }
             scribbling = false;
         } else {
@@ -205,10 +237,22 @@ void painter::drawLineTo(const QPoint &endPoint, int slice)
         QPainter painter(&image);
         if (rainbow){
             QColor hsvColor = myPenColor.toHsv();
+
+            if (!mirror){
             painter.setPen(QPen(QColor::fromHsv((hsvColor.hue()+360*slice/nbSlices)%360, hsvColor.saturation(), hsvColor.value()), myPenWidth, Qt::SolidLine, Qt::RoundCap,
                                 Qt::RoundJoin));
-        } else {
-            painter.setPen(QPen(myPenColor, myPenWidth, Qt::SolidLine, Qt::RoundCap,
+            }else{
+                if(slice%2==1){
+                    painter.setPen(QPen(QColor::fromHsv((hsvColor.hue()+360*(slice-1)/nbSlices)%360, hsvColor.saturation(), hsvColor.value()), myPenWidth, Qt::SolidLine, Qt::RoundCap,
+                                        Qt::RoundJoin));
+                } else {
+                    painter.setPen(QPen(QColor::fromHsv((hsvColor.hue()+360*slice/nbSlices)%360, hsvColor.saturation(), hsvColor.value()), myPenWidth, Qt::SolidLine, Qt::RoundCap,
+                                        Qt::RoundJoin));
+                }
+            }
+        }
+        else {
+        painter.setPen(QPen(myPenColor, myPenWidth, Qt::SolidLine, Qt::RoundCap,
                                 Qt::RoundJoin));
         }
         painter.drawLine(lastPoints[slice], endPoint);

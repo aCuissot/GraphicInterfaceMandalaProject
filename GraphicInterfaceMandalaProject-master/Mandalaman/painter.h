@@ -25,6 +25,7 @@ public:
     void setSliceNumber(int);
     void doGrid();
     void setRainbow();
+    void setMirror();
 
 public slots:
     void clearImage();
@@ -44,12 +45,13 @@ private:
     bool modified;
     bool scribbling;
     bool rainbow;
+    bool mirror;
     int myPenWidth;
     int nbSlices;
     QColor myPenColor;
     QImage image;
     QPoint lastPoint;
     QImage grid;
-    QPoint lastPoints[20];
+    QPoint lastPoints[40];
 };
 #endif // PAINTER_H

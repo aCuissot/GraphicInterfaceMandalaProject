@@ -37,6 +37,9 @@ private slots:
     void gridTransparency(int);
     void rainbowColor();
     */
+
+    void mirrorFnct();
+
     void rainbowColor();
 
     void resolutionFnct(int);
